@@ -2,31 +2,32 @@ import S from '@sanity/desk-tool/structure-builder'
 import MdSettings from 'react-icons/lib/md/settings'
 import MdPerson from 'react-icons/lib/md/person'
 
-const hiddenDocTypes = listItem =>
-  !['category', 'author', 'post', 'siteSettings'].includes(listItem.getId())
+const hiddenDocTypes=listItem =>
+  !['category', 'user', 'post', 'siteSettings'].includes(listItem.getId())
 
 export default () =>
   S.list()
     .title('Content')
     .items([
       S.listItem()
-        .title('Settings')
+        .title('Blogs')
         .icon(MdSettings)
-        .child(
-          S.editor()
-            .id('siteSettings')
-            .schemaType('siteSettings')
-            .documentId('siteSettings')
-        ),
+        .schemaType('blog')
+        .child(S.documentTypeList('blog').title('Blogs')),
+      // S.listItem()
+      //   .title('Role')
+      //   .icon(MdSettings)
+      //   .schemaType('role')
+      //   .child(S.documentTypeList('role').title('Roles')),
+      S.listItem()
+        .title('User')
+        .icon(MdPerson)
+        .schemaType('user')
+        .child(S.documentTypeList('user').title('Users')),
       S.listItem()
         .title('Blog posts')
         .schemaType('post')
-        .child(S.documentTypeList('post').title('Blog posts')),
-      S.listItem()
-        .title('Authors')
-        .icon(MdPerson)
-        .schemaType('author')
-        .child(S.documentTypeList('author').title('Authors')),
+        .child(S.documentTypeList('post').title('Posts')),
       S.listItem()
         .title('Categories')
         .schemaType('category')

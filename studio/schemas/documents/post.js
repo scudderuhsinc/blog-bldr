@@ -1,9 +1,9 @@
-import {format} from 'date-fns'
+import { format } from 'date-fns'
 
 export default {
   name: 'post',
   type: 'document',
-  title: 'Blog Post',
+  title: 'Post',
   fields: [
     {
       name: 'title',
@@ -20,6 +20,13 @@ export default {
         source: 'title',
         maxLength: 96
       }
+    },
+    {
+      name: 'blog',
+      title: 'Blog',
+      description: 'What blog will own this post',
+      type: 'reference',
+      to: [{ type: 'blog' }]
     },
     {
       name: 'publishedAt',
@@ -40,19 +47,17 @@ export default {
         'This ends up on summary pages, on Google, when people share your post in social media.'
     },
     {
-      name: 'authors',
-      title: 'Authors',
-      type: 'array',
-      of: [
-        {
-          type: 'authorReference'
-        }
-      ]
+      name: 'author',
+      title: 'Author',
+      type: 'reference',
+      to: {
+        type: 'user'
+      }
     },
     {
       name: 'categories',
-      type: 'array',
       title: 'Categories',
+      type: 'array',
       of: [
         {
           type: 'reference',
@@ -105,13 +110,13 @@ export default {
       slug: 'slug',
       media: 'mainImage'
     },
-    prepare ({title = 'No title', publishedAt, slug = {}, media}) {
-      const dateSegment = format(publishedAt, 'YYYY/MM')
-      const path = `/${dateSegment}/${slug.current}/`
+    prepare({ title='No title', publishedAt, slug={}, media }) {
+      const dateSegment=format(publishedAt, 'YYYY/MM')
+      const path=`/${dateSegment}/${slug.current}/`
       return {
         title,
         media,
-        subtitle: publishedAt ? path : 'Missing publishing date'
+        subtitle: publishedAt? path:'Missing publishing date'
       }
     }
   }

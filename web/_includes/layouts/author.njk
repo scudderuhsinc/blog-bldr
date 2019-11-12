@@ -2,8 +2,9 @@
 layout: layouts/base.njk
 templateClass: tmpl-author
 ---
-<h1>{{ author.name }}</h1>
+<h1>{{ user.name }}</h1>
+<p>Role: {{ user.role.name }}</p>
 
-{{ author.bio | markdownify | safe }}
+{{user.bio | markdownify | safe }}
 
 <p><a href="{{ '/' | url }}">← Home</a></p>

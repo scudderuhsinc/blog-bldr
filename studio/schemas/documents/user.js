@@ -1,12 +1,35 @@
 export default {
-  name: 'author',
+  name: 'user',
   type: 'document',
-  title: 'Author',
+  title: 'User',
   fields: [
     {
       name: 'name',
       type: 'string',
       title: 'Name'
+    },
+    {
+      name: 'role',
+      type: 'reference',
+      to: [
+        {
+          type: 'role'
+        }
+      ]
+    },
+    {
+      name: 'blogs',
+      title: 'Blogs',
+      description: 'Creates Post content for:',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: {
+            type: 'blog'
+          }
+        }
+      ]
     },
     {
       name: 'slug',
@@ -32,7 +55,7 @@ export default {
   preview: {
     select: {
       title: 'name',
-      subtitle: 'slug.current',
+      subtitle: 'role.name',
       media: 'image'
     }
   }

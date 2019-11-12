@@ -1,6 +1,6 @@
 # Blog Builder
 
-_Simple blog starter with [11ty](https://11ty.io)._
+_Simple blog builder with [11ty](https://11ty.io)._
 
 Deployed from [sanity.io/create](https://www.sanity.io/create/?template=sanity-io%2Fsanity-template-gatsby-blog).
 

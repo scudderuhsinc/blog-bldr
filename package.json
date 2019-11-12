@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "sanity-eleventy-blog",
+  "name": "universal-health-services_blog-builder",
   "version": "1.0.0",
   "scripts": {
     "build": "lerna run build --parallel",
