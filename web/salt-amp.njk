@@ -1,0 +1,12 @@
+---
+layout: layouts/salt-amp.njk
+tags:
+  - nav
+navtitle: Home
+---
+
+<h1>Latest Posts</h1>
+
+{% set saltamp = collections.saltPosts %}
+{% include "salt-list-amp.njk" %}
+

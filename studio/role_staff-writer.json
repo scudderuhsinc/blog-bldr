@@ -1,0 +1,27 @@
+{
+    "_id": "_.groups.staff_writer",
+    "_type": "system.group",
+    "grants": [
+        {
+            "filter": "_type == 'category'",
+            "permissions": [
+                "read",
+                "update",
+                "create"
+            ]
+        },
+        {
+            "filter": "_type == 'post'",
+            "permissions": [
+                "read",
+                "update",
+                "create",
+                "manage"
+            ]
+        }
+    ],
+    "members": [
+        "e-a-user-id",
+        "e-another-user-id"
+    ]
+}

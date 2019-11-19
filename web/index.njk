@@ -1,13 +1,31 @@
----
-layout: layouts/home.njk
-tags:
-  - nav
-navtitle: Home
----
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title Here</title>
+    <meta name="Description" content="Description Here">
+    {% set css %}
+      {% include "style.css" %}
+    {% endset %}
+    <style>
+      {{ css | cssmin | safe }}
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Blog Overview</h1>
+    </header>
 
-<h1>Latest Posts</h1>
+    <main>
+        <ul>
+        <li><a href="/corp/">CORP</a></li>
+        <li><a href="/mwlc/">MWLC</a></li>
+        <li><a href="/salt/">SALT</a></li>
+        </ul>
+    </main>
 
-{% set postslist = collections.myPosts %}
-{% include "postslist.njk" %}
+    <footer></footer>
 
-<p>More posts can be found in <a href="{{ '/posts/' | url }}">the archive</a>.</p>
+  </body>
+</html>

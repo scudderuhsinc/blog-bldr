@@ -76,7 +76,7 @@ yarn.lock
 .env.production
 
 # Static site
-_site
+_sites/*
 
 # Development Notes
 # use blog-bldr/README.md for public readme file

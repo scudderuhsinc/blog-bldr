@@ -1,0 +1,11 @@
+---
+layout: layouts/html.njk
+templateClass: tmpl-salt
+---
+<article itemtype="https://schema.org/BlogPosting">
+  <h1 itemprop="title">{{ post.title }}</h1>
+  <img src="{{ post.imgSrc | url }}" alt"{{ post.imgAlt }}"/>
+  <p>Written by: <span itemprop="author">{{ post.author }} <img src="post.authorImg | url" /></span></p>
+  {{ post.body | markdownify | safe }}
+  <p><a href="{{ '/' | url }}">← Home</a></p>
+</article>

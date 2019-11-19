@@ -1,9 +1,13 @@
 import S from '@sanity/desk-tool/structure-builder'
-import MdSettings from 'react-icons/lib/md/settings'
-import MdPerson from 'react-icons/lib/md/person'
+import Blogs from 'react-icons/lib/go/settings'
+import Roles from 'react-icons/lib/go/key'
+import Users from 'react-icons/lib/go/person'
+import Posts from 'react-icons/lib/go/file-text'
+//import Import from 'react-icons/lib/go/git-pull-request'
+import Categories from 'react-icons/lib/go/file-directory'
 
 const hiddenDocTypes=listItem =>
-  !['category', 'user', 'post', 'siteSettings'].includes(listItem.getId())
+  !['blog', 'role', 'user', 'post', 'baldwin', 'category'].includes(listItem.getId())
 
 export default () =>
   S.list()
@@ -11,25 +15,32 @@ export default () =>
     .items([
       S.listItem()
         .title('Blogs')
-        .icon(MdSettings)
+        .icon(Blogs)
         .schemaType('blog')
         .child(S.documentTypeList('blog').title('Blogs')),
-      // S.listItem()
-      //   .title('Role')
-      //   .icon(MdSettings)
-      //   .schemaType('role')
-      //   .child(S.documentTypeList('role').title('Roles')),
       S.listItem()
-        .title('User')
-        .icon(MdPerson)
+        .title('Roles')
+        .icon(Roles)
+        .schemaType('role')
+        .child(S.documentTypeList('role').title('Roles')),
+      S.listItem()
+        .title('Users')
+        .icon(Users)
         .schemaType('user')
         .child(S.documentTypeList('user').title('Users')),
       S.listItem()
-        .title('Blog posts')
+        .title('Posts')
+        .icon(Posts)
         .schemaType('post')
         .child(S.documentTypeList('post').title('Posts')),
+      // S.listItem()
+      // .title('Import')
+      // .icon(Import)
+      // .schemaType('baldwin')
+      // .child(S.documentTypeList('baldwin').title('Baldwin Publishing')),
       S.listItem()
         .title('Categories')
+        .icon(Categories)
         .schemaType('category')
         .child(S.documentTypeList('category').title('Categories')),
       // This returns an array of all the document types

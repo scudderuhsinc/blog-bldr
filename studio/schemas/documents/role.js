@@ -6,7 +6,21 @@ export default {
         {
             name: 'name',
             type: 'string',
-            title: 'Name'
+            description: 'Human readable name.'
+        },
+        {
+            name: 'groupName',
+            type: 'string',
+            description: "Label for the user group, as used in user access sessions and defined in /studio/role_<roll-name>.json (ie '_id':'_.groups.contributing_writer')",
+            options: {
+                source: 'name',
+                maxLength: 30,
+                slugify: input => input
+                    .toLowerCase()
+                    .replace(/\s+/g, '_')
+                    .slice(0, 200)
+            }
+
         },
         {
             name: 'description',

@@ -6,14 +6,22 @@ const env=require('./_data/app')
 module.exports=function (eleventyConfig) {
   // Get any Enviornmental Variables from CLI
   // BLOG=mwlc TARGET=dev npx @11ty/eleventy --serve
-  var out
-  if (typeof env.blog!="undefined") {
-    out=env.blog
-  } else {
-    out='_site'
-  }
+  //console.log(`ENV: `+env.target)
+  var target="production"
+  // if (typeof env.target!='undefined'&&env.target=='dev'||env.target=='development') {
+  //   target="_sites/development"
+  // } else if (typeof env.target=='undefined') {
+  //   target="_sites/production"
+  // }
+  //process.env.TARGET='undefined'
+  // console.log(env.target)
 
-  console.log(env.target)
+  // json formatting
+  eleventyConfig.addNunjucksFilter("json", function (obj) {
+    var json=JSON.stringify(obj, null, '\t')
+    //console.log(`filter: `+json)
+    return json
+  });
 
   // https://www.11ty.io/docs/quicktips/inline-css/
   eleventyConfig.addFilter("cssmin", function (code) {
@@ -67,7 +75,6 @@ module.exports=function (eleventyConfig) {
     // If you don’t have a subdirectory, use "" or "/" (they do the same thing)
     // This is only used for URLs (it does not affect your file structure)
     pathPrefix: "/",
-
     markdownTemplateEngine: "liquid",
     htmlTemplateEngine: "njk",
     dataTemplateEngine: "njk",
@@ -76,7 +83,7 @@ module.exports=function (eleventyConfig) {
       input: ".",
       includes: "_includes",
       data: "_data",
-      output: "_"+out
+      output: "_sites"
     }
   };
 }

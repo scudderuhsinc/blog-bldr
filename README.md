@@ -28,3 +28,8 @@ Netlify automatically deploys new changes commited to master on GitHub. If you w
 [![Slack Community Button](https://slack.sanity.io/badge.svg)](https://slack.sanity.io/)
 
 Join [Sanity’s developer community](https://slack.sanity.io) or ping us [on twitter](https://twitter.com/sanity_io).
+
+### NOTES
+[Access Control](https://gist.github.com/runeb/6df439900232e34d7009bfd0cd44c3bc)
+[Mozilla's Nunjucks Templating](https://mozilla.github.io/nunjucks/templating.html)
+[Creating AMP Pages](https://amp.dev/)

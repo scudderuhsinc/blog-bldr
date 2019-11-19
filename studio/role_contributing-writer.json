@@ -1,0 +1,24 @@
+{
+    "_id": "_.groups.contributing_writer",
+    "_type": "system.group",
+    "grants": [
+        {
+            "filter": "_type == 'category'",
+            "permissions": [
+                "read"
+            ]
+        },
+        {
+            "filter": "_type == 'post'",
+            "permissions": [
+                "read",
+                "update",
+                "create"
+            ]
+        }
+    ],
+    "members": [
+        "e-a-user-id",
+        "e-another-user-id"
+    ]
+}

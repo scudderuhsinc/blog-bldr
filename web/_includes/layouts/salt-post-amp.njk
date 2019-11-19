@@ -1,0 +1,10 @@
+---
+layout: layouts/amp.njk
+templateClass: tmpl-salt
+---
+<article itemtype="https://schema.org/BlogPosting">
+  <h1 itemprop="title">{{ amp.title }}</h1>
+  <p>Written by: <span itemprop="author">HERE</span></p>
+  {{ amp.body | markdownify | safe }}
+  <p><a href="{{ '/' | url }}">← Home</a></p>
+</article>

@@ -1,0 +1,9 @@
+<ol reversed class="postlist" style="counter-reset: start-from {{ saltlist.length + 1 }}" itemtype="https://schema.org/Blog">
+{% for post in saltlist | reverse %}
+  {% set currentPost = post.data.post %}
+  <li itemscope itemtype="https://schema.org/BlogPosting" class="postlist-item{% if post.url == url %} postlist-item-active{% endif %}">
+    <a href="{{ post.url | url }}" class="postlist-link" itemprop="url">{% if currentPost.title %}<span itemprop="title">{{ currentPost.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</span></a>
+    <time class="postlist-date" datetime="{{ currentPost.publishedAt }}" itemprop="datePublished">{{ currentPost.publishedAt|readableDate }}</time>
+  </li>
+{% endfor %}
+</ol>
