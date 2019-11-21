@@ -23,6 +23,10 @@ module.exports=function (eleventyConfig) {
     return json
   });
 
+  // Short code to return post's Teaser Text
+  // https://keepinguptodate.com/pages/2019/06/creating-blog-with-eleventy/
+  eleventyConfig.addShortcode('teaser', post => extractTeaser(post));
+
   // https://www.11ty.io/docs/quicktips/inline-css/
   eleventyConfig.addFilter("cssmin", function (code) {
     return new CleanCSS({}).minify(code).styles;
@@ -60,6 +64,7 @@ module.exports=function (eleventyConfig) {
 
   eleventyConfig.addFilter("markdownify", function (value) {
     const md=new markdownIt(options)
+    //console.log(`mdify: `+value)
     return md.render(value)
   })
   return {
@@ -86,4 +91,51 @@ module.exports=function (eleventyConfig) {
       output: "_sites"
     }
   };
+}
+
+function extractTeaser(post) {
+  // no body
+  let teasertxt=null
+  const markdownIt=require('markdown-it');
+  let options={
+    html: true,
+    breaks: true,
+    linkify: true
+  }
+  const md=new markdownIt(options)
+  // no body text
+  if (!post.hasOwnProperty('body')) {
+    console.warn('Failed to extract teaser: Document has no property "body".');
+    return null;
+  }
+  // teaser is defined
+  if (post.teaser!=''||post.teaser!='undefined'||post.teaser!=null) {
+    teasertxt=post.teaser+` ...`
+  }
+  const content=post.body
+  let txt=null
+  // The start and end separators to try and match to extract the teaser text
+  const separatorsList=[
+    { start: '<!-- Teaser Start -->', end: '<!-- Teaser End -->' },
+    { start: '<p>', end: '</p>' }
+  ];
+
+  separatorsList.some(separators => {
+    const startPosition=content.indexOf(separators.start)
+    const endPosition=content.lastIndexOf(separators.end)
+    if (startPosition!==-1&&endPosition!==-1) {
+      txt=content.substring(startPosition+separators.start.length, endPosition).trim()+` ..`
+      return true; // Exit out of array loop on first match
+    }
+  })
+  // Search for short codes
+  if (txt==''||txt=='undefined'||txt==null) {
+    // No <!-- Teaser --> shortcodes in body copy
+    teasertxt=md.render(post.body.substring(0, 12).trim()+` ..`)
+  } else {
+    // <!-- Teaser --> shortcodes in body copy
+    teasertxt=md.render(txt)
+  }
+  //console.log(`at F(n): `+teasertxt)
+  return teasertxt
 }

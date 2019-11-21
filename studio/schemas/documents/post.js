@@ -50,9 +50,9 @@ export default {
       name: 'author',
       title: 'Author',
       type: 'reference',
-      to: {
+      to: [{
         type: 'user'
-      }
+      }]
     },
     {
       name: 'categories',
@@ -66,6 +66,15 @@ export default {
           }
         }
       ]
+    },
+    {
+      name: 'teaser',
+      type: 'string',
+      title: 'Post Teaser',
+      description: "Enter the post's catchy, descriptive, and not too long teaser text ~or~ add shortcodes <!-- Teaser Start --> and <!-- Teaser End --> to the post's body text.",
+      options: {
+        maxLength: 140
+      }
     },
     {
       name: 'body',

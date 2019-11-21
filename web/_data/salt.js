@@ -44,17 +44,20 @@ async function getPosts() {
     publishedAt,
     title,
     slug,
+    excerpt,
+    teaser,
     "author": author->name,
-    "authorImg": author->userId,
+    "authorImg": author->userImage,
     "blog": blog->id,
     "imgSrc": mainImage.asset->url,
-    "imgAlt": mainImage.alt
+    "imgAlt": mainImage.alt,
+    body
   }`
   const order=`| order(publishedAt asc)`
   const query=[filter, projection, order].join(' ')
   const docs=await client.fetch(query).catch(err => console.error(err))
   const reducedDocs=overlayDrafts(hasToken, docs)
-  console.log(`Post: `+JSON.stringify(reducedDocs[0]))
+  //console.log(`Post: `+JSON.stringify(reducedDocs[0]))
   const preparePosts=reducedDocs.map(generatePost)
   //await generatePostXML(docs)
   //console.log(`preparePosts: `+JSON.stringify(docs, null, '\t'))

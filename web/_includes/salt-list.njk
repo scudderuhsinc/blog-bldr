@@ -3,6 +3,7 @@
   {% set currentPost = post.data.post %}
   <li itemscope itemtype="https://schema.org/BlogPosting" class="postlist-item{% if post.url == url %} postlist-item-active{% endif %}">
     <a href="{{ post.url | url }}" class="postlist-link" itemprop="url">{% if currentPost.title %}<span itemprop="title">{{ currentPost.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</span></a>
+    {% teaser currentPost %}
     <time class="postlist-date" datetime="{{ currentPost.publishedAt }}" itemprop="datePublished">{{ currentPost.publishedAt|readableDate }}</time>
   </li>
 {% endfor %}
