@@ -3,9 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ renderData.title or title or metadata.title }}</title>
+    <title> {% if blog %}{{ blog }}{% endif %} | {{ renderData.title or title or metadata.title }}</title>
     <meta name="Description" content="{{ renderData.description or description or metadata.description }}">
       {# <link rel="alternate" href="{{ metadata.feed.path | url }}" type="application/atom+xml" title="{{ metadata.title }}"> #}
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/scudderuhsinc/UHStyles@master/beta/styles.min.css">  
     {% set css %}
       {% include "style.css" %}
     {% endset %}
@@ -13,21 +14,26 @@
       {{ css | cssmin | safe }}
     </style>
   </head>
-  <body>
-    <header>
-      <ul class="nav">
-        {%- for nav in collections.nav | reverse -%}
-        <li class="nav-item{% if nav.url == page.url %} nav-item-active{% endif %}"><a href="{{ nav.url | url }}">{{ nav.data.navtitle }}</a></li>
-        {%- endfor -%}
-      </ul>
+  <body class="main">
+
+    <header class="call-out_alt-grey rm_margins">
+      <div class="container-inner_col">
+        {% if blog %}<h1>{{ blog | title }}</h1>{% else %}<h1>No Blog Defined</h1>{% endif %}
+        <ul class="nav container-row">
+          {%- for nav in collections.nav | reverse -%}
+          <li class="nav-item{% if nav.url == page.url %} nav-item-active{% endif %}"><a href="{{ nav.url | url }}">{{ nav.data.navtitle }}</a></li>
+          {%- endfor -%}
+        </ul>
     </header>
 
-    <main{% if templateClass %} class="{{ templateClass }}"{% endif %}>
-      {{ content | safe }}
-    </main>
+    <div class="{% if templateClass %}{{ templateClass }} {% endif %}full-width rm_margins">
+        {{ content | safe }}
+    </div>
 
-    <footer>
-        <p><em>This is an <a href="https://www.11ty.io/">Eleventy</a> + <a href="https://www.sanity.io">Sanity.io</a> project inspired by the <a href="https://github.com/11ty/eleventy-base-blog"><code>eleventy-base-blog</code> repo</a>.</em></p>
+    <footer class="full-width call-out_grey rm_margins">
+      <div class="container-inner_col">
+        <p>This is footer text.</p>
+      </div>
     </footer>
 
     <!-- Current page: {{ page.url | url }} -->

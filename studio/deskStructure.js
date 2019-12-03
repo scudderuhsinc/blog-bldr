@@ -2,6 +2,7 @@ import S from '@sanity/desk-tool/structure-builder'
 import Blogs from 'react-icons/lib/go/settings'
 import Roles from 'react-icons/lib/go/key'
 import Users from 'react-icons/lib/go/person'
+//import Authors from 'react-icons/lib/go/pencil'
 import Posts from 'react-icons/lib/go/file-text'
 //import Import from 'react-icons/lib/go/git-pull-request'
 import Categories from 'react-icons/lib/go/file-directory'
@@ -28,6 +29,11 @@ export default () =>
         .icon(Users)
         .schemaType('user')
         .child(S.documentTypeList('user').title('Users')),
+      // S.listItem()
+      //   .title('Authors')
+      //   .icon(Authors)
+      //   .schemaType('authorReference')
+      //   .child(S.documentTypeList('authorReference').title('Authors')),
       S.listItem()
         .title('Posts')
         .icon(Posts)

@@ -1,7 +1,7 @@
 const { DateTime }=require("luxon");
 const util=require('util')
 const CleanCSS=require("clean-css");
-const env=require('./_data/app')
+//const env=require('./_data/app')
 
 module.exports=function (eleventyConfig) {
   // Get any Enviornmental Variables from CLI
@@ -15,13 +15,6 @@ module.exports=function (eleventyConfig) {
   // }
   //process.env.TARGET='undefined'
   // console.log(env.target)
-
-  // json formatting
-  eleventyConfig.addNunjucksFilter("json", function (obj) {
-    var json=JSON.stringify(obj, null, '\t')
-    //console.log(`filter: `+json)
-    return json
-  });
 
   // Short code to return post's Teaser Text
   // https://keepinguptodate.com/pages/2019/06/creating-blog-with-eleventy/
@@ -131,7 +124,7 @@ function extractTeaser(post) {
   // Search for short codes
   if (txt==''||txt=='undefined'||txt==null) {
     // No <!-- Teaser --> shortcodes in body copy
-    teasertxt=md.render(post.body.substring(0, 12).trim()+` ..`)
+    teasertxt=md.render(post.body.substring(0, 139).trim()+` ..`)
   } else {
     // <!-- Teaser --> shortcodes in body copy
     teasertxt=md.render(txt)
@@ -139,3 +132,40 @@ function extractTeaser(post) {
   //console.log(`at F(n): `+teasertxt)
   return teasertxt
 }
+
+function postXML(p) {
+  //console.log(`atXML`+p)
+  const current={ post: [] }
+  for (ea of p) {
+    current.post.push({
+      blog_id: ea.blogId._ref,
+      //post_id: ea._id,
+      //created: ea._createdAt,
+      //updated: ea._updatedAt,
+      pushed: new Date().toISOString(),
+      slug: ea.slug.current,
+      title: ea.title,
+      //mainImg: `path here`,
+      //teaser: ea.body
+    })
+    // if (list){
+    //   list.push(current)
+    //   return list
+    // } else {
+    /* create post.json */
+    fs.writeFile(`./_sites/`+ea.blog_id+`/`+ea.slug.current+`/index.json`, JSON.stringify(current.post), function (err) { if (err) throw err })
+    //return
+    // }
+  }
+}
+
+//function postListXML(p) {
+//console.log(`atXML`+p)
+//const list={ all: [] }
+//  for (ea of p) {
+// postXML(p, list)
+//    })
+/* create post.json */
+    //fs.writeFile(`./_sites/`+ea.blog_id+`/`+ea.slug.current+`/index.json`, JSON.stringify(current.post), function (err) { if (err) throw err })
+//  }
+//}

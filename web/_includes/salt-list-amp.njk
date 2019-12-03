@@ -1,6 +1,0 @@
-<ol reversed class="postlist" style="counter-reset: start-from {{ saltamp.length + 1 }}" itemtype="https://schema.org/Blog">
-{% for amp in saltamp | reverse  %}
-  {% set currentAmp = amp.data.post %}
-  <li itemscope><a href="{{ currentAmp.url | url }}" itemprop="url"><span itemprop="name">{{ currentAmp.title | title }}</span></a></li>
-{% endfor %}
-</ol>

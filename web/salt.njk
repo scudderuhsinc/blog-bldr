@@ -1,11 +1,32 @@
 ---
-layout: layouts/salt.njk
+layout: layouts/html.njk
 tags:
   - nav
 navtitle: Home
+templateClass: salt
+blog: Salt Lake Behavioral Health
+permalink: /salt/index.html
 ---
+  <div class="container-inner_col">
+    <h2 itemprop="title">Latest Posts</h2>
+  </div>
 
-<h1>Latest Posts</h1>
+<div class="container-inner_col" itemtype="https://schema.org/Blog">
 
 {% set saltlist = collections.saltPosts %}
-{% include "salt-list.njk" %}
+
+<ul reversed class="postlist" style="counter-reset: start-from {{ saltlist.length + 1 }}" >
+{% for post in saltlist | reverse %}
+  {% set currentPost = post.data.post %}
+  <li itemscope itemtype="https://schema.org/BlogPosting" class="postlist-item{% if post.url == url %} postlist-item-active{% endif %} ">
+    <a href="{{ post.url | url }}" class="postlist-link" itemprop="url">
+    <img src="{{ currentPost.imgSrc | url }}?w=350" alt"{{ currentPost.imgAlt }}" />
+    {% if currentPost.title %}<span itemprop="title">{{ currentPost.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</span>
+    {% teaser currentPost %}
+    <p>Continue Reading →</p>
+    </a>
+  </li>
+{% endfor %}
+</ul>
+
+</div>

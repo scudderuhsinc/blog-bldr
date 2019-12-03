@@ -12,8 +12,9 @@ import role from './documents/role'
 import user from './documents/user'
 
 // Object types - used by Documents
-import bodyPortableText from './objects/bodyPortableText'
+//import authorReference from './objects/authorReference'
 import bioPortableText from './objects/bioPortableText'
+import bodyPortableText from './objects/bodyPortableText'
 import excerptPortableText from './objects/excerptPortableText'
 import mainImage from './objects/mainImage'
 
@@ -32,6 +33,7 @@ export default createSchema({
     role,
     user,
     mainImage,
+    //authorReference,
     bodyPortableText,
     bioPortableText,
     excerptPortableText

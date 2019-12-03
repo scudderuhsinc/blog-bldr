@@ -14,7 +14,8 @@ export default {
             name: 'id',
             title: 'Blog Code',
             type: 'string',
-            description: `unique 4 letter code`,
+            description: `unique 4 letter lowercase code`,
+            validation: Rule => Rule.error('You have to fill out 4 charactors, all lowercase.').lowercase().required(),
             options: {
                 maxLength: 4
             }

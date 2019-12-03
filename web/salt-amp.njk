@@ -8,5 +8,17 @@ navtitle: Home
 <h1>Latest Posts</h1>
 
 {% set saltamp = collections.saltPosts %}
-{% include "salt-list-amp.njk" %}
+
+<ol reversed class="postlist" style="counter-reset: start-from {{ saltamp.length + 1 }}" itemtype="https://schema.org/Blog">
+{% for amp in saltamp | reverse  %}
+  {% set currentAmp = amp.data.post %}
+  <li itemscope itemtype="https://schema.org/BlogPosting" class="postlist-item{% if post.url == url %} postlist-item-active{% endif %}">
+    <a href="{{ currentAmp.slug.current + '/index.amp.html' | url }}" class="postlist-link" itemprop="url">
+    <img src="{{ currentAmp.imgSrc | url }}?w=300" alt"{{ currentAmp.imgAlt }}" width="300px" height="207px" />
+    {% if currentAmp.title %}<span itemprop="title">{{ currentAmp.title }}{% else %}<code>{{ currentAmp.url | url }}</code>{% endif %}</span>
+    {% teaser currentAmp %}
+    </a>
+  </li>
+{% endfor %}
+</ol>
 

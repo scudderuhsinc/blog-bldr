@@ -6,53 +6,48 @@ export default {
   title: 'Post',
   fields: [
     {
-      name: 'title',
-      type: 'string',
-      title: 'Title',
-      description: 'Titles should be catchy, descriptive, and not too long'
-    },
-    {
-      name: 'slug',
-      type: 'slug',
-      title: 'Slug',
-      description: 'Some frontends will require a slug to be set to be able to show the post',
-      options: {
-        source: 'title',
-        maxLength: 96
-      }
-    },
-    {
       name: 'blog',
       title: 'Blog',
-      description: 'What blog will own this post',
+      description: 'Define the blog to display this post.',
       type: 'reference',
-      to: [{ type: 'blog' }]
+      to: [{ type: 'blog' }],
+      validation: Rule => Rule.error('You have to define the blog.').required()
+    },
+    {
+      name: 'author',
+      title: 'Author',
+      description: "Hidden by default, set 'display' in User -> Author Details.",
+      type: 'reference',
+      to: { type: 'user' },
+      validation: Rule => Rule.error('You have to define an author.').required()
     },
     {
       name: 'publishedAt',
       type: 'datetime',
       title: 'Published at',
-      description: 'This can be used to schedule post for publishing'
+      description: 'This can be used to schedule post for publishing.'
     },
     {
-      name: 'mainImage',
-      type: 'mainImage',
-      title: 'Main image'
+      name: 'title',
+      type: 'string',
+      title: 'Title',
+      description: 'Titles should be catchy, descriptive, and not too long.',
+      validation: Rule => Rule.error('You have to define title.').required()
     },
     {
-      name: 'excerpt',
-      type: 'excerptPortableText',
-      title: 'Excerpt',
-      description:
-        'This ends up on summary pages, on Google, when people share your post in social media.'
-    },
-    {
-      name: 'author',
-      title: 'Author',
-      type: 'reference',
-      to: [{
-        type: 'user'
-      }]
+      name: 'slug',
+      type: 'slug',
+      title: 'Slug',
+      description: 'The title slug to show the post, trimmed to 96 characters.',
+      validation: Rule => Rule.error('Define a 96 charactor, all lowercase and without spaces (replace with "-"), or hit the [generate] button.').required(),
+      options: {
+        source: 'title',
+        maxLength: 96,
+        slugify: input => input
+          .toLowerCase()
+          .replace(/\s+/g, '-')
+          .slice(0, 95)
+      }
     },
     {
       name: 'categories',
@@ -68,10 +63,15 @@ export default {
       ]
     },
     {
+      name: 'mainImage',
+      type: 'mainImage',
+      title: 'Main Image'
+    },
+    {
       name: 'teaser',
       type: 'string',
       title: 'Post Teaser',
-      description: "Enter the post's catchy, descriptive, and not too long teaser text ~or~ add shortcodes <!-- Teaser Start --> and <!-- Teaser End --> to the post's body text.",
+      description: "A catchy, descriptive, and not too long teaser text for this post; or define with shortcodes <!-- Teaser Start --> and <!-- Teaser End --> to the post's body text.",
       options: {
         maxLength: 140
       }
@@ -80,7 +80,15 @@ export default {
       name: 'body',
       type: 'bodyPortableText',
       title: 'Body'
-    }
+    },
+
+    {
+      name: 'excerpt',
+      type: 'excerptPortableText',
+      title: 'Excerpt',
+      description:
+        'This ends up on summary pages, on Google, when people share your post in social media.'
+    },
   ],
   orderings: [
     {
@@ -116,7 +124,7 @@ export default {
     select: {
       title: 'title',
       publishedAt: 'publishedAt',
-      slug: 'slug',
+      author: 'author.authorDetails.firstName',
       media: 'mainImage'
     },
     prepare({ title='No title', publishedAt, slug={}, media }) {

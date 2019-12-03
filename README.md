@@ -31,5 +31,6 @@ Join [Sanity’s developer community](https://slack.sanity.io) or ping us [on tw
 
 ### NOTES
 [Access Control](https://gist.github.com/runeb/6df439900232e34d7009bfd0cd44c3bc)
+[11ty Templates](https://www.11ty.io/docs/layouts/)
 [Mozilla's Nunjucks Templating](https://mozilla.github.io/nunjucks/templating.html)
 [Creating AMP Pages](https://amp.dev/)
