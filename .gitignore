@@ -6,3 +6,5 @@
 
 # lerna files
 /lerna-debug.log
+studio/README.md
+web/README.md
