@@ -1,3 +1,0 @@
-# blog-bldr-studio
-
-## NOTES
