@@ -12,7 +12,7 @@ pagination:
 permalink: /{{ post.blogId }}/{{ post.slug.current | slug }}/index.html
 ---
 
-<article itemtype="https://schema.org/BlogPosting">
+<article alt="{{ post.blogId }}" itemtype="https://schema.org/BlogPosting">
   <div class="call-out_lt-grey">
     <div class="container-inner_col">
       <img src="{{ post.imgSrc | url }}" alt"{{ post.imgAlt }}" class="featured-img" />
