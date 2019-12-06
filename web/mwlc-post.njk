@@ -1,0 +1,45 @@
+---
+layout: layouts/html.njk
+templateClass: mwlc
+blog: Manatee Weight Loss Center
+tags:
+  - mwlcPosts
+pagination:
+  alias: post
+  data: mwlc
+  size: 1
+  addAllPagesToCollections: true
+permalinkBypassOutputDir: true
+permalink: "_{{ post.blogId }}/{{ post.slug.current | slug }}/index.html"
+---
+
+<article alt="{{ post.blogId }}" itemtype="https://schema.org/BlogPosting">
+  <div class="call-out_lt-grey">
+    <div class="container-inner_col">
+      <img src="{{ post.imgSrc | url }}" alt"{{ post.imgAlt }}" class="featured-img" />
+    </div>
+  </div>
+  {% if post.authorDisplay %}
+    <div class="container-inner_col">
+      <div class="authorcard container-row" itemprop="author">
+          <img src="{{ post.authorImgSrc | url }}?h=64" alt="{{ post.authorImg.alt }}"/>
+          <div class="authorcard_infoWrapper">
+            <div class="authorcard_by">authored by:</div>
+            <div class="authorcard_name">{{ post.author }}</div>
+          </div>
+      </div>
+    </div>
+  {% else %}
+    <div class="container-inner_col">
+      <div class="staffwriter" itemprop="author">Staff Writer</div>
+    </div>
+  {% endif %}
+  <div class="container-inner_col">
+    <h2 itemprop="title">{{ post.title }}</h2>
+  </div>
+  <div class="container-inner_col">
+    {{ post.body | markdownify | safe }}
+    <p>Published: <time datetime="{{ post.publishedAt }}" itemprop="datePublished">{{ post.publishedAt|readableDate }}</time></p>
+    <p><a href="{{ '/' + post.blogId + '/' | url }}">← Home</a></p>
+  </div>
+</article>

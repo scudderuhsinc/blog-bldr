@@ -1,0 +1,33 @@
+---
+layout: layouts/html.njk
+tags:
+  - nav
+navtitle: Home
+templateClass: mwlc
+blog: Manatee Weight Loss Center
+permalinkBypassOutputDir: true
+permalink: "_mwlc/index.html"
+---
+  <div class="container-inner_col">
+    <h2 itemprop="title">Latest Posts</h2>
+  </div>
+
+<div class="container-inner_col" itemtype="https://schema.org/Blog">
+
+{% set list = collections.mwlcPosts %}
+
+<ul reversed class="postlist" style="counter-reset: start-from {{ list.length + 1 }}" >
+{% for post in list | reverse %}
+  {% set currentPost = post.data.post %}
+  <li itemscope itemtype="https://schema.org/BlogPosting" class="postlist-item{% if post.url == url %} postlist-item-active{% endif %} ">
+    <a href="{{ post.url | url }}" class="postlist-link" itemprop="url">
+    <img src="{{ currentPost.imgSrc | url }}?w=350" alt"{{ currentPost.imgAlt }}" />
+    {% if currentPost.title %}<span itemprop="title">{{ currentPost.title }}{% else %}<code>{{ post.url }}</code>{% endif %}</span>
+    {% teaser currentPost %}
+    <p>Continue Reading →</p>
+    </a>
+  </li>
+{% endfor %}
+</ul>
+
+</div>
