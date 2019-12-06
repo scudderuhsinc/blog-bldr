@@ -77,7 +77,6 @@ yarn.lock
 
 # Static site
 _sites/*
-_mwlc/*
 
 # Development Notes
 # use blog-bldr/README.md for public readme file

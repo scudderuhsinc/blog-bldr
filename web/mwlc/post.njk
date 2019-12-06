@@ -1,5 +1,5 @@
 ---
-layout: layouts/html.njk
+layout: /layouts/html.njk
 templateClass: mwlc
 blog: Manatee Weight Loss Center
 tags:
@@ -9,8 +9,7 @@ pagination:
   data: mwlc
   size: 1
   addAllPagesToCollections: true
-permalinkBypassOutputDir: true
-permalink: "_{{ post.blogId }}/{{ post.slug.current | slug }}/index.html"
+permalink: "/{{ post.blogId }}/{{ post.slug.current | slug }}/index.html"
 ---
 
 <article alt="{{ post.blogId }}" itemtype="https://schema.org/BlogPosting">
@@ -40,6 +39,6 @@ permalink: "_{{ post.blogId }}/{{ post.slug.current | slug }}/index.html"
   <div class="container-inner_col">
     {{ post.body | markdownify | safe }}
     <p>Published: <time datetime="{{ post.publishedAt }}" itemprop="datePublished">{{ post.publishedAt|readableDate }}</time></p>
-    <p><a href="{{ '/' + post.blogId + '/' | url }}">← Home</a></p>
+    <p><a href="/">← Home</a></p>
   </div>
 </article>
