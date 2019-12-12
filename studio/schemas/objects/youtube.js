@@ -17,6 +17,12 @@ export default {
             name: 'url',
             type: 'url',
             title: 'YouTube video URL'
+        },
+        {
+            name: 'alt',
+            type: 'string',
+            title: 'Alternative text',
+            description: 'Important for SEO and accessiblity.'
         }
     ],
     preview: {
