@@ -5,7 +5,7 @@ const serializers=require('../utils/serializers')
 const overlayDrafts=require('../utils/overlayDrafts')
 const hasToken=!!client.config().token
 
-const fs=require('fs')
+//const fs=require('fs')
 
 function generatePost(post) {
   return {
